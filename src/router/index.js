@@ -56,7 +56,7 @@ export const constantRoutes = [
   },
 
   {
-    path: '/table',
+    path: '/',
     component: Layout,
     name: '建议和诉求',
     children: [{
