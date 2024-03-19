@@ -81,6 +81,19 @@ export const constantRoutes = [
   },
 
   {
+    path: '/editor',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Editor',
+        component: () => import('@/views/editor/index'),
+        meta: { title: 'Editor', icon: 'tree' }
+      }
+    ]
+  },
+
+  {
     path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',
