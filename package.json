@@ -1,8 +1,8 @@
 {
-  "name": "vue-admin-template",
-  "version": "4.4.0",
-  "description": "A vue admin template with Element UI & axios & iconfont & permission control & lint",
-  "author": "Pan <panfree23@gmail.com>",
+  "name": "vue-admin",
+  "version": "1.0.0",
+  "description": "A vue admin with Element UI & axios & iconfont & permission control & lint",
+  "author": "Leo <zhao_yizhuo@bupt.edu.cn>",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",
@@ -22,6 +22,7 @@
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
     "vue": "2.6.10",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "3.0.6",
     "vuex": "3.1.0"
   },

@@ -60,37 +60,35 @@ export const constantRoutes = [
     component: Layout,
     name: '建议和诉求',
     children: [{
-      path: 'table',
+      path: 'suggestion',
       name: '建议和诉求',
-      component: () => import('@/views/table/index'),
+      component: () => import('@/views/Suggestion/index'),
       meta: { title: '建议和诉求', icon: 'table' }
     }]
   },
 
   {
-    path: '/form',
+    path: '/',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
+    name: '社区风采',
+    children: [{
+      path: 'community',
+      name: '社区风采',
+      component: () => import('@/views/Community/index'),
+      meta: { title: '社区风采', icon: 'tree' }
+    }]
   },
 
   {
-    path: '/editor',
+    path: '/',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Editor',
-        component: () => import('@/views/editor/index'),
-        meta: { title: 'Editor', icon: 'tree' }
-      }
-    ]
+    name: '温馨提示',
+    children: [{
+      path: 'suggestion',
+      name: '温馨提示',
+      component: () => import('@/views/Notice/index'),
+      meta: { title: '温馨提示', icon: 'table' }
+    }]
   },
 
   {
