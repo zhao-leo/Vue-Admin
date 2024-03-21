@@ -71,12 +71,24 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     name: '社区风采',
-    children: [{
-      path: 'community',
-      name: '社区风采',
-      component: () => import('@/views/Community/index'),
-      meta: { title: '社区风采', icon: 'tree' }
-    }]
+    meta: {
+      title: '社区风采',
+      icon: 'tree'
+    },
+    children: [
+      {
+        path: 'list',
+        name: '文章列表',
+        component: () => import('@/views/Community/list/index'),
+        meta: { title: '文章列表' }
+      },
+      {
+        path: 'editor',
+        name: '编辑文档',
+        component: () => import('@/views/Community/editor/index'),
+        meta: { title: '编辑文档' }
+      }
+    ]
   },
 
   {
