@@ -25,7 +25,9 @@
         </el-checkbox-group>
       </el-form-item>
       <el-form-item label="Activity form">
-        <el-input v-model="form.desc" type="textarea" />
+        <quill-editor v-model="content" ref="myQuillEditor" :options="editorOption" @blur="onEditorBlur($event)"
+          @focus="onEditorFocus($event)" @change="onEditorChange($event)">
+        </quill-editor>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">Create</el-button>
@@ -36,7 +38,15 @@
 </template>
 
 <script>
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import { quillEditor } from 'vue-quill-editor'
+
 export default {
+  components: {
+    quillEditor
+  },
   data() {
     return {
       form: {
@@ -48,7 +58,9 @@ export default {
         type: [],
         resource: '',
         desc: ''
-      }
+      },
+      content: `<p>请在这里输入内容</p>`,
+      editorOption: {}
     }
   },
   methods: {
@@ -60,7 +72,10 @@ export default {
         message: 'cancel!',
         type: 'warning'
       })
-    }
+    },
+    onEditorBlur() { }, // 失去焦点触发事件
+    onEditorFocus() { }, // 获得焦点触发事件
+    onEditorChange() { } // 内容改变触发事件
   }
 }
 </script>

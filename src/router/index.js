@@ -42,7 +42,16 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
-
+  {
+    path: '/dev',
+    component: Layout,
+    children: [{
+      path: 'index',
+      name: 'dev',
+      component: () => import('@/views/dev/index'),
+      meta: { title: 'dev', icon: 'table' }
+    }]
+  },
   {
     path: '/',
     component: Layout,
@@ -84,9 +93,9 @@ export const constantRoutes = [
       },
       {
         path: 'editor',
-        name: '编辑文档',
+        name: '新建文档',
         component: () => import('@/views/Community/editor/index'),
-        meta: { title: '编辑文档' }
+        meta: { title: '新建文档' }
       }
     ]
   },

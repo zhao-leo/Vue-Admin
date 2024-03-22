@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      content: `<p>这是 vue-quill-editor 的内容！</p>`,
+      content: `<p>请在这里输入内容</p>`,
       editorOption: {}
     }
   },
