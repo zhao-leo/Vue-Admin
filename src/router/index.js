@@ -65,11 +65,11 @@ export const constantRoutes = [
   },
 
   {
-    path: '/',
+    path: '/suggestion',
     component: Layout,
     name: '建议和诉求',
     children: [{
-      path: 'suggestion',
+      path: 'index',
       name: '建议和诉求',
       component: () => import('@/views/Suggestion/index'),
       meta: { title: '建议和诉求', icon: 'table' }
@@ -77,7 +77,7 @@ export const constantRoutes = [
   },
 
   {
-    path: '/',
+    path: '/community',
     component: Layout,
     name: '社区风采',
     meta: {
@@ -101,11 +101,11 @@ export const constantRoutes = [
   },
 
   {
-    path: '/',
+    path: '/notice',
     component: Layout,
     name: '温馨提示',
     children: [{
-      path: 'suggestion',
+      path: 'index',
       name: '温馨提示',
       component: () => import('@/views/Notice/index'),
       meta: { title: '温馨提示', icon: 'table' }

@@ -25,9 +25,14 @@
         </el-checkbox-group>
       </el-form-item>
       <el-form-item label="Activity form">
-        <quill-editor v-model="content" ref="myQuillEditor" :options="editorOption" @blur="onEditorBlur($event)"
-          @focus="onEditorFocus($event)" @change="onEditorChange($event)">
-        </quill-editor>
+        <quill-editor
+          ref="myQuillEditor"
+          v-model="content"
+          :options="editorOption"
+          @blur="onEditorBlur($event)"
+          @focus="onEditorFocus($event)"
+          @change="onEditorChange($event)"
+        />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">Create</el-button>
@@ -59,7 +64,7 @@ export default {
         resource: '',
         desc: ''
       },
-      content: `<p>请在这里输入内容</p>`,
+      content: '',
       editorOption: {}
     }
   },
