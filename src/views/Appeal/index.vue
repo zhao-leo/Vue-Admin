@@ -55,9 +55,9 @@
 </template>
 
 <script>
-import { getList } from '@/api/suggestion.js'
+import { getList } from '@/api/table.js'
 import { mapGetters } from 'vuex'
-import { postreply } from '@/api/suggestion.js'
+
 export default {
   filters: {
     statusFilter(status) {
@@ -74,8 +74,7 @@ export default {
       listLoading: true,
       dialogVisible: false,
       replyContent: '',
-      author: '',
-      row: ''
+      author: ''
     }
   },
   computed: {
@@ -96,15 +95,11 @@ export default {
       this.dialogVisible = true
       this.author = this.name
       this.title = row.title
-      this.row = row
     },
     submitReply() {
       // 在这里发送数据
       console.log(this.replyContent)
       this.dialogVisible = false
-      postreply(this.row.id, this.replyContent).then(response => {
-        this.fetchData()
-      })
     },
     fetchData() {
       this.listLoading = true
