@@ -36,11 +36,19 @@
       </el-table-column>
       <el-table-column align="center" label="操作" width="150">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">回复</el-button>
         </template>
       </el-table-column>
     </el-table>
+    <el-dialog title="回复" :visible.sync="dialogVisible" width="45%">
+      <el-input v-model="originalContent" placeholder="原始内容" disabled />
+      <el-date-picker v-model="originalTime" type="datetime" placeholder="原始时间" disabled />
+      <el-input v-model="replyContent" />
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="submitReply">提交</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -60,13 +68,28 @@ export default {
   data() {
     return {
       list: null,
-      listLoading: true
+      listLoading: true,
+      dialogVisible: false,
+      replyContent: ''
     }
   },
   created() {
     this.fetchData()
   },
   methods: {
+    handleEdit(index, row) {
+      this.dialogVisible = true
+      console.log('handleEditcalled')
+      this.originalContent = row.title
+      this.originalTime = row.display_time
+      this.replyContent = row.pageviews
+      this.dialogVisible = true
+    },
+    submitReply() {
+      // 在这里发送数据
+      console.log(this.replyContent)
+      this.dialogVisible = false
+    },
     fetchData() {
       this.listLoading = true
       getList().then(response => {

@@ -67,6 +67,18 @@ export default {
     this.fetchData()
   },
   methods: {
+    handleDelete(index, row) {
+      this.$confirm('确认删除吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        console.log('删除', index, row)
+        this.fetchData()
+      }).catch(() => {
+        console.log('取消删除')
+      })
+    },
     fetchData() {
       this.listLoading = true
       getList().then(response => {
