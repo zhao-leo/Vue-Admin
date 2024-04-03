@@ -1,5 +1,15 @@
 <template>
   <div class="app-container">
+    <!-- <el-input
+      v-model="searchTitle"
+      placeholder="请输入标题"
+    />
+    <el-date-picker
+      v-model="searchDate"
+      type="date"
+      placeholder="选择日期"
+    />
+    <el-button @click="handleSearch">搜索</el-button> -->
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -13,12 +23,12 @@
           {{ scope.$index }}
         </template>
       </el-table-column>
-      <el-table-column label="标题">
+      <el-table-column label="内容">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.content }}
         </template>
       </el-table-column>
-      <el-table-column label="处理人" width="110" align="center">
+      <el-table-column label="提出者" width="110" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.author }}</span>
         </template>
@@ -41,10 +51,10 @@
       </el-table-column>
     </el-table>
     <el-dialog title="回复" :visible.sync="dialogVisible" width="80%">
-      <el-input v-model="title" placeholder="标题" disabled />
-      <el-input v-model="pageview" placeholder="浏览量" disabled />
+      <el-input v-model="content" placeholder="反馈内容" disabled />
       <el-date-picker v-model="originalTime" type="datetime" placeholder="原始时间" disabled />
-      <el-input v-model="author" placeholder="处理人" disabled />
+      <el-input v-model="author" placeholder="提出者" disabled />
+      <el-input v-model="server" placeholder="处理人" disabled />
       <el-input v-model="replyContent" placeholder="请输入回复内容" />
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
@@ -74,7 +84,8 @@ export default {
       listLoading: true,
       dialogVisible: false,
       replyContent: '',
-      author: ''
+      author: '',
+      server: ''
     }
   },
   computed: {
@@ -88,19 +99,20 @@ export default {
   methods: {
     handleEdit(index, row) {
       this.dialogVisible = true
-      console.log('handleEditcalled')
-      this.pageview = '浏览量 ' + row.pageviews + ' 次'
+      this.content = '反馈内容；' + row.content
       this.originalTime = row.display_time
-      console.log(this.replyContent)
-      this.dialogVisible = true
-      this.author = this.name
-      this.title = row.title
+      this.author = '反馈者：' + row.author
+      this.server = '处理人：' + this.name
     },
     submitReply() {
       // 在这里发送数据
-      console.log(this.replyContent)
       this.dialogVisible = false
     },
+    // handleSearch() {
+    //   // 在这里处理搜索操作
+    //   // 例如，你可以调用一个 API 来获取搜索结果
+    //   // 然后将结果赋给 tableData
+    // },
     fetchData() {
       this.listLoading = true
       getList().then(response => {

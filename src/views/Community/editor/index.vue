@@ -70,6 +70,7 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log(this.content)
       this.$message('submit!')
     },
     onCancel() {

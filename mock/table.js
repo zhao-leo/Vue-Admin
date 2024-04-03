@@ -4,6 +4,7 @@ const data = Mock.mock({
   'items|30': [{
     id: '@id',
     title: '@sentence(10, 20)',
+    content: '@sentence(50, 100)',
     'status|1': ['published', 'draft'],
     author: 'name',
     display_time: '@datetime',

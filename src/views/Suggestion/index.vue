@@ -42,7 +42,6 @@
     </el-table>
     <el-dialog title="回复" :visible.sync="dialogVisible" width="80%">
       <el-input v-model="title" placeholder="标题" disabled />
-      <el-input v-model="pageview" placeholder="浏览量" disabled />
       <el-date-picker v-model="originalTime" type="datetime" placeholder="原始时间" disabled />
       <el-input v-model="author" placeholder="处理人" disabled />
       <el-input v-model="replyContent" placeholder="请输入回复内容" />
@@ -55,9 +54,9 @@
 </template>
 
 <script>
-import { getList } from '@/api/suggestion.js'
+import { getList } from '@/api/table.js'
 import { mapGetters } from 'vuex'
-import { postreply } from '@/api/suggestion.js'
+
 export default {
   filters: {
     statusFilter(status) {
@@ -74,8 +73,7 @@ export default {
       listLoading: true,
       dialogVisible: false,
       replyContent: '',
-      author: '',
-      row: ''
+      author: ''
     }
   },
   computed: {
@@ -90,21 +88,16 @@ export default {
     handleEdit(index, row) {
       this.dialogVisible = true
       console.log('handleEditcalled')
-      this.pageview = '浏览量 ' + row.pageviews + ' 次'
       this.originalTime = row.display_time
       console.log(this.replyContent)
       this.dialogVisible = true
       this.author = this.name
       this.title = row.title
-      this.row = row
     },
     submitReply() {
       // 在这里发送数据
       console.log(this.replyContent)
       this.dialogVisible = false
-      postreply(this.row.id, this.replyContent).then(response => {
-        this.fetchData()
-      })
     },
     fetchData() {
       this.listLoading = true

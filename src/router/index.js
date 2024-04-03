@@ -65,18 +65,6 @@ export const constantRoutes = [
   },
 
   {
-    path: '/suggestion',
-    component: Layout,
-    name: '建议',
-    children: [{
-      path: 'index',
-      name: '建议',
-      component: () => import('@/views/Suggestion/index'),
-      meta: { title: '建议', icon: 'table' }
-    }]
-  },
-
-  {
     path: '/appeal',
     component: Layout,
     name: '诉求',
@@ -85,6 +73,18 @@ export const constantRoutes = [
       name: '诉求',
       component: () => import('@/views/Appeal/index'),
       meta: { title: '诉求', icon: 'table' }
+    }]
+  },
+
+  {
+    path: '/suggestion',
+    component: Layout,
+    name: '建议',
+    children: [{
+      path: 'index',
+      name: '建议',
+      component: () => import('@/views/Suggestion/index'),
+      meta: { title: '建议', icon: 'table' }
     }]
   },
 
@@ -122,6 +122,19 @@ export const constantRoutes = [
       component: () => import('@/views/Notice/index'),
       meta: { title: '温馨提示', icon: 'table' }
     }]
+  },
+  {
+    path: '/profile',
+    component: Layout,
+    redirect: '/profile/edit',
+    children: [
+      {
+        path: 'edit',
+        name: 'ProfileEdit',
+        component: () => import('@/views/profile/ProfileEdit'),
+        meta: { title: '个人信息编辑', icon: 'edit' }
+      }
+    ]
   },
 
   {
