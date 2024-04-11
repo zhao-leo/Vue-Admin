@@ -15,27 +15,27 @@
       </el-table-column>
       <el-table-column label="星期一">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.monday"></el-input>
+          <el-input v-model="scope.row.monday" />
         </template>
       </el-table-column>
       <el-table-column label="星期二">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.tuesday"></el-input>
+          <el-input v-model="scope.row.tuesday" />
         </template>
       </el-table-column>
       <el-table-column label="星期三">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.wednesday"></el-input>
+          <el-input v-model="scope.row.wednesday" />
         </template>
       </el-table-column>
       <el-table-column label="星期四">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.thursday"></el-input>
+          <el-input v-model="scope.row.thursday" />
         </template>
       </el-table-column>
       <el-table-column label="星期五">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.friday"></el-input>
+          <el-input v-model="scope.row.friday" />
         </template>
       </el-table-column>
     </el-table>
