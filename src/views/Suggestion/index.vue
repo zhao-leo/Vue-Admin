@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/table.js'
+import { getList } from '@/api/suggestion.js'
 import { mapGetters } from 'vuex'
 
 export default {

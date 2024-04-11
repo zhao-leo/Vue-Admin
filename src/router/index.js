@@ -63,7 +63,19 @@ export const constantRoutes = [
       meta: { title: '欢迎', icon: 'dashboard' }
     }]
   },
-
+  {
+    path: '/profile',
+    component: Layout,
+    name: '个人信息',
+    children: [
+      {
+        path: 'index',
+        name: '个人信息',
+        component: () => import('@/views/profile/index'),
+        meta: { title: '个人信息', icon: 'edit' }
+      }
+    ]
+  },
   {
     path: '/appeal',
     component: Layout,
@@ -111,7 +123,6 @@ export const constantRoutes = [
       }
     ]
   },
-
   {
     path: '/notice',
     component: Layout,
@@ -124,76 +135,15 @@ export const constantRoutes = [
     }]
   },
   {
-    path: '/profile',
+    path: '/limit',
     component: Layout,
-    redirect: '/profile/edit',
-    children: [
-      {
-        path: 'edit',
-        name: 'ProfileEdit',
-        component: () => import('@/views/profile/ProfileEdit'),
-        meta: { title: '个人信息编辑', icon: 'edit' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
-      }
-    ]
+    name: '车辆限行',
+    children: [{
+      path: 'index',
+      name: '车辆限行',
+      component: () => import('@/views/limit/index'),
+      meta: { title: '车辆限行', icon: 'table' }
+    }]
   },
 
   // 404 page must be placed at the end !!!
