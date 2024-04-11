@@ -145,6 +145,17 @@ export const constantRoutes = [
       meta: { title: '车辆限行', icon: 'table' }
     }]
   },
+  {
+    path: '/panel',
+    component: Layout,
+    name: '社区信息',
+    children: [{
+      path: 'index',
+      name: '社区信息',
+      component: () => import('@/views/Panel/index'),
+      meta: { title: '社区信息', icon: 'table' }
+    }]
+  },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

@@ -5,11 +5,11 @@
     </el-header>
     <el-main>
       <el-input
+        v-model="noticeContent"
         type="textarea"
         :rows="4"
         placeholder="请输入内容"
-        v-model="noticeContent"
-      ></el-input>
+      />
     </el-main>
     <el-footer>
       <el-button type="primary" @click="submitNotice">提交</el-button>
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { MessageBox } from 'element-ui'
+
 export default {
   data() {
     return {
@@ -26,7 +28,12 @@ export default {
   },
   methods: {
     submitNotice() {
-      // Handle the submit logic here
+      MessageBox.alert('提交成功！', '温馨提示', {
+        confirmButtonText: '确定',
+        callback: action => {
+          // 在这里处理用户点击确定按钮后的逻辑
+        }
+      })
       console.log(this.noticeContent)
     }
   }
