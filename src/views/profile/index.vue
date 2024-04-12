@@ -14,7 +14,7 @@
           <el-input v-model="formData.manager_name" type="text" />
         </el-form-item>
         <el-form-item label="手机号码:">
-          <el-input v-model="formData.manager_tele" type="text" />
+          <el-input v-model="formData.manager_tele" type="text" :maxlength="11" :minlength="11" pattern="\d*" />
         </el-form-item>
         <el-form-item label="账号:">
           <el-input v-model="formData.manager_account" type="text" />
@@ -24,6 +24,7 @@
             v-model="formData.manager_code"
             :type="passwordType"
             :suffix-icon="passwordType === 'password' ? 'el-icon-view' : 'el-icon-edit'"
+            :minlength="6"
             @click:append="showPwd"
           />
         </el-form-item>

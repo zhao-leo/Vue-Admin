@@ -7,15 +7,17 @@
       <el-input
         v-if="roles.includes('admin')"
         v-model="phoneNumber"
-        placeholder="请输入电话号码"
-      />
+      >
+        <template slot="prepend">电话号码</template>
+      </el-input>
       <p v-else>电话号码: {{ phoneNumber }}</p>
 
       <el-input
         v-if="roles.includes('admin')"
         v-model="adminName"
-        placeholder="请输入管理员姓名"
-      />
+      >
+        <template slot="prepend">管理员姓名</template>
+      </el-input>
       <p v-else>管理员姓名: {{ adminName }}</p>
 
       <el-upload
