@@ -15,6 +15,7 @@
         </el-form-item>
         <el-form-item label="手机号码:">
           <el-input v-model="formData.manager_tele" type="text" :maxlength="11" :minlength="11" pattern="\d*" />
+          <span style="font-size: 12px; color: #333;">(请输入11位数字)</span>
         </el-form-item>
         <el-form-item label="账号:">
           <el-input v-model="formData.manager_account" type="text" />
@@ -63,6 +64,10 @@ export default {
       this.formData.manager_code = ''
     },
     submitForm() {
+      if (this.formData.manager_tele.length !== 11) {
+        this.$message.error('请输入11位手机号码')
+        return
+      }
       console.log(this.formData.manager_account, this.formData.manager_code)
       this.editMode = false
     },
