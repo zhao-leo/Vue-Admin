@@ -36,26 +36,16 @@
       </el-table-column>
       <el-table-column align="center" label="操作" width="150">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">回复</el-button>
+          <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog title="回复" :visible.sync="dialogVisible" width="80%">
-      <el-input v-model="title" placeholder="标题" disabled />
-      <el-date-picker v-model="originalTime" type="datetime" placeholder="原始时间" disabled />
-      <el-input v-model="author" placeholder="处理人" disabled />
-      <el-input v-model="replyContent" placeholder="请输入回复内容" />
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="submitReply">提交</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/suggestion.js'
-import { mapGetters } from 'vuex'
+import { getList } from '@/api/table'
 
 export default {
   filters: {
@@ -70,34 +60,24 @@ export default {
   data() {
     return {
       list: null,
-      listLoading: true,
-      dialogVisible: false,
-      replyContent: '',
-      author: ''
+      listLoading: true
     }
-  },
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
   },
   created() {
     this.fetchData()
   },
   methods: {
-    handleEdit(index, row) {
-      this.dialogVisible = true
-      console.log('handleEditcalled')
-      this.originalTime = row.display_time
-      console.log(this.replyContent)
-      this.dialogVisible = true
-      this.author = this.name
-      this.title = row.title
-    },
-    submitReply() {
-      // 在这里发送数据
-      console.log(this.replyContent)
-      this.dialogVisible = false
+    handleDelete(index, row) {
+      this.$confirm('确认删除吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        console.log('删除', index, row)
+        this.fetchData()
+      }).catch(() => {
+        console.log('取消删除')
+      })
     },
     fetchData() {
       this.listLoading = true

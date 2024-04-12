@@ -42,7 +42,16 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
-
+  {
+    path: '/dev',
+    component: Layout,
+    children: [{
+      path: 'index',
+      name: 'dev',
+      component: () => import('@/views/dev/index'),
+      meta: { title: 'dev', icon: 'table' }
+    }]
+  },
   {
     path: '/',
     component: Layout,
@@ -54,100 +63,98 @@ export const constantRoutes = [
       meta: { title: '欢迎', icon: 'dashboard' }
     }]
   },
-
   {
-    path: '/',
+    path: '/profile',
     component: Layout,
-    name: '建议和诉求',
+    name: '个人信息',
+    children: [
+      {
+        path: 'index',
+        name: '个人信息',
+        component: () => import('@/views/profile/index'),
+        meta: { title: '个人信息', icon: 'edit' }
+      }
+    ]
+  },
+  {
+    path: '/appeal',
+    component: Layout,
+    name: '诉求',
     children: [{
-      path: 'suggestion',
-      name: '建议和诉求',
-      component: () => import('@/views/Suggestion/index'),
-      meta: { title: '建议和诉求', icon: 'table' }
+      path: 'index',
+      name: '诉求',
+      component: () => import('@/views/Appeal/index'),
+      meta: { title: '诉求', icon: 'table' }
     }]
   },
 
   {
-    path: '/',
+    path: '/suggestion',
+    component: Layout,
+    name: '建议',
+    children: [{
+      path: 'index',
+      name: '建议',
+      component: () => import('@/views/Suggestion/index'),
+      meta: { title: '建议', icon: 'table' }
+    }]
+  },
+
+  {
+    path: '/community',
     component: Layout,
     name: '社区风采',
-    children: [{
-      path: 'community',
-      name: '社区风采',
-      component: () => import('@/views/Community/index'),
-      meta: { title: '社区风采', icon: 'tree' }
-    }]
+    meta: {
+      title: '社区风采',
+      icon: 'tree'
+    },
+    children: [
+      {
+        path: 'list',
+        name: '文章列表',
+        component: () => import('@/views/Community/list/index'),
+        meta: { title: '文章列表' }
+      },
+      {
+        path: 'editor',
+        name: '新建文档',
+        component: () => import('@/views/Community/editor/index'),
+        meta: { title: '新建文档' }
+      }
+    ]
   },
-
   {
-    path: '/',
+    path: '/notice',
     component: Layout,
     name: '温馨提示',
     children: [{
-      path: 'suggestion',
+      path: 'index',
       name: '温馨提示',
       component: () => import('@/views/Notice/index'),
       meta: { title: '温馨提示', icon: 'table' }
     }]
   },
-
   {
-    path: '/nested',
+    path: '/limit',
     component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
-      }
-    ]
+    name: '车辆限行',
+    children: [{
+      path: 'index',
+      name: '车辆限行',
+      component: () => import('@/views/limit/index'),
+      meta: { title: '车辆限行', icon: 'table' }
+    }]
+  },
+  {
+    path: '/panel',
+    component: Layout,
+    name: '社区信息',
+    children: [{
+      path: 'index',
+      name: '社区信息',
+      component: () => import('@/views/Panel/index'),
+      meta: { title: '社区信息', icon: 'table' }
+    }]
   },
 
   // 404 page must be placed at the end !!!
