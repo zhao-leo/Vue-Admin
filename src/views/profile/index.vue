@@ -61,8 +61,7 @@ export default {
       formData: {
         manager_name: '',
         manager_tele: '',
-        manager_account: '',
-        manager_code: ''
+        manager_account: ''
       },
       editMode: false,
       passwordType: 'password'
