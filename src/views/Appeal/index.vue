@@ -93,7 +93,7 @@ export default {
 
       ],
       imageUrl: 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png',
-      attachmentUrl: 'https://m701.music.126.net/20240412025820/1208de7c449d7fe5bb6d9eb75c9ab2fd/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/34455915010/53e0/684f/7196/b3c9e23956fb156f51c754f655f84895.mp3'
+      attachmentUrl: 'https://m701.music.126.net/20240412025820/1208de7c449d7fe5bb6d9eb75c9ab2fd/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/34455915010/53e0/684f/7196/b3c9e23956fb156f51c754f655f84895.docx'
     }
   },
   computed: {
