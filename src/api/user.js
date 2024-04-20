@@ -1,18 +1,22 @@
 import request from '@/utils/request'
 
 export function login(data) {
+  console.log(data)
   return request({
-    url: '/vue-admin-template/user/login',
+    url: '/user/ManagerLogin/',
     method: 'post',
     data
   })
 }
 
 export function getInfo(token) {
+  // console.log(token)
   return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
+    headers: {
+      'Authorization': token
+    },
+    url: '/user/ManagerDetail/',
+    method: 'get'
   })
 }
 

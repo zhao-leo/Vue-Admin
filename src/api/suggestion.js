@@ -1,16 +1,25 @@
 import request from '@/utils/request'
+import axios from 'axios'
 
-export function getList(params) {
+export function getList(token, params) {
   return request({
-    url: '/vue-admin-template/table/list',
+    headers: {
+      'Authorization': token
+    },
+    url: '/user/SuggestionAll/',
     method: 'get',
     params
   })
 }
-export function updateItem(id, data) {
-  return request({
-    url: `/vue-admin-template/table/update/${id}`,
-    method: 'post',
-    data
+
+export function handleForm(token, id, formData) {
+  return axios({
+    headers: {
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    },
+    url: `/user/SuggestionListDetail/${id}/`,
+    method: 'put',
+    data: JSON.stringify(formData)
   })
 }

@@ -8,8 +8,8 @@ const getDefaultState = () => {
     name: '',
     avatar: '',
     roles: '',
-    phonenumber: ''
-
+    phonenumber: '',
+    id: 4
   }
 }
 
@@ -33,18 +33,22 @@ const mutations = {
   },
   SET_ROLE: (state, roles) => {
     state.roles = roles
+  },
+  SET_ID: (state, id) => {
+    state.id = id
   }
 }
 
 const actions = {
   // user login
   login({ commit }, userInfo) {
-    const { username, password } = userInfo
+    const { manager_account, manager_code } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+      login({ manager_account: manager_account.trim(), manager_code: manager_code }).then(response => {
+        // const { data } = response
+        // console.log(response.token)
+        commit('SET_TOKEN', response.token)
+        setToken(response.token)
         resolve()
       }).catch(error => {
         reject(error)
@@ -57,17 +61,18 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
-
+        console.log(data)
         if (!data) {
           return reject('登陆失败，请重新登陆.')
         }
 
-        const { name, avatar, phonenumber, roles } = data
+        const { manager_account, manager_name, manager_tele, id } = data
 
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        commit('SET_PHONENUMBER', phonenumber)
-        commit('SET_ROLE', roles)
+        commit('SET_NAME', manager_name)
+        // commit('SET_AVATAR', avatar)
+        commit('SET_PHONENUMBER', manager_tele)
+        commit('SET_ROLE', manager_account)
+        commit('SET_ID', id)
         resolve(data)
       }).catch(error => {
         reject(error)

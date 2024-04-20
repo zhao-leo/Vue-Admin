@@ -8,6 +8,9 @@
       <div>密码: ******</div>
       <el-button type="primary" @click="openDialog">编辑</el-button>
     </el-card>
+    <el-card>
+      <el-button type="primary" @click="openPasswordDialog">修改密码</el-button>
+    </el-card>
     <el-dialog title="编辑信息" :visible.sync="editMode" @close="editMode = false">
       <el-form class="form">
         <el-form-item label="名字:">
@@ -34,9 +37,24 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+    <el-dialog title="修改密码" :visible.sync="passwordEditMode" @close="passwordEditMode = false">
+      <el-form class="form">
+        <el-form-item label="设置新密码:">
+          <el-input v-model="newPassword" type="password" />
+        </el-form-item>
+        <el-form-item label="确认新密码:">
+          <el-input v-model="confirmNewPassword" type="password" />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitPasswordForm">提交</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -50,18 +68,27 @@ export default {
       passwordType: 'password'
     }
   },
-  mounted() {
-    this.formData = {
-      manager_name: '张三',
-      manager_tele: '13800138000',
-      manager_account: 'admin',
-      manager_code: ''
-    }
+  computed: {
+    ...mapGetters([
+      'name', 'phonenumber', 'roles'
+    ])
+  },
+  created() {
+    this.formData.manager_name = this.name
+    this.formData.manager_tele = this.phonenumber
+    this.formData.manager_account = this.roles
+    console.log(this.formData)
   },
   methods: {
     openDialog() {
       this.editMode = true
       this.formData.manager_code = ''
+    },
+
+    openPasswordDialog() {
+      this.passwordEditMode = true
+      this.newPassword = ''
+      this.confirmNewPassword = ''
     },
     submitForm() {
       if (this.formData.manager_tele.length !== 11) {
@@ -73,6 +100,16 @@ export default {
     },
     showPwd() {
       this.passwordType === 'password' ? 'text' : 'password'
+    },
+    submitPasswordForm() {
+      // 验证密码是否一致等操作
+      if (this.newPassword !== this.confirmNewPassword) {
+        this.$message.error('两次输入的密码不一致')
+        return
+      }
+      // 处理提交逻辑，比如发送请求等
+      console.log('新密码:', this.newPassword)
+      this.passwordEditMode = false
     }
   }
 }

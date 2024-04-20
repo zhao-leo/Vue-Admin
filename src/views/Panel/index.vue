@@ -5,7 +5,7 @@
     </el-header>
     <el-main>
       <el-input
-        v-if="roles.includes('admin')"
+        v-if="id.includes('1','2','3')"
         v-model="phoneNumber"
       >
         <template slot="prepend">电话号码</template>
@@ -13,7 +13,7 @@
       <p v-else>电话号码: {{ phoneNumber }}</p>
 
       <el-input
-        v-if="roles.includes('admin')"
+        v-if="id.includes('1','2','3')"
         v-model="adminName"
       >
         <template slot="prepend">管理员姓名</template>
@@ -21,7 +21,7 @@
       <p v-else>管理员姓名: {{ adminName }}</p>
 
       <el-upload
-        v-if="roles.includes('admin')"
+        v-if="id.includes('1','2','3')"
         action="https://jsonplaceholder.typicode.com/posts/"
         list-type="picture-card"
         :on-success="handleUploadSuccess"
@@ -45,13 +45,17 @@ export default {
       contactName: 'xxx',
       phoneNumber: '18203506616',
       coverImage: 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png',
-      adminName: 'adminxss'
+      adminName: 'adminxss',
+      id: this.id
     }
   },
   computed: {
     ...mapGetters([
-      'roles'
+      'id'
     ])
+  },
+  created() {
+    console.log(this.id)
   },
   methods: {
     handleUploadSuccess(response, file) {
