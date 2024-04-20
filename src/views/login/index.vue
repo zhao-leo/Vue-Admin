@@ -72,6 +72,10 @@ export default {
         username: '',
         password: ''
       },
+      loginData: {
+        manager_account: '',
+        manager_code: ''
+      },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
@@ -101,10 +105,13 @@ export default {
       })
     },
     handleLogin() {
+      this.loginData.manager_account = this.loginForm.username
+      this.loginData.manager_code = this.loginForm.password
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
+          console.log('loginForm', this.loginData)
+          this.$store.dispatch('user/login', this.loginData).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
           }).catch(() => {

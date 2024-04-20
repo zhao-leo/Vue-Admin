@@ -43,16 +43,6 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/dev',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'dev',
-      component: () => import('@/views/dev/index'),
-      meta: { title: 'dev', icon: 'table' }
-    }]
-  },
-  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -75,17 +65,6 @@ export const constantRoutes = [
         meta: { title: '个人信息', icon: 'edit' }
       }
     ]
-  },
-  {
-    path: '/appeal',
-    component: Layout,
-    name: '诉求',
-    children: [{
-      path: 'index',
-      name: '诉求',
-      component: () => import('@/views/Appeal/index'),
-      meta: { title: '诉求', icon: 'table' }
-    }]
   },
 
   {
@@ -162,7 +141,6 @@ export const constantRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
