@@ -99,7 +99,7 @@ export default {
       }
       handlePasswordSubmit(this.token, passworddata)
       // 处理提交逻辑，比如发送请求等
-      console.log('新密码:', this.newPassword)
+      // console.log('新密码:', this.newPassword)
       this.passwordEditMode = false
     }
   }

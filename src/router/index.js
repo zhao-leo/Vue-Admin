@@ -66,7 +66,17 @@ export const constantRoutes = [
       }
     ]
   },
-
+  {
+    path: '/complaint',
+    component: Layout,
+    name: '投诉',
+    children: [{
+      path: 'index',
+      name: '投诉',
+      component: () => import('@/views/Complaint/index'),
+      meta: { title: '投诉', icon: 'table' }
+    }]
+  },
   {
     path: '/suggestion',
     component: Layout,
@@ -77,30 +87,6 @@ export const constantRoutes = [
       component: () => import('@/views/Suggestion/index'),
       meta: { title: '建议', icon: 'table' }
     }]
-  },
-
-  {
-    path: '/community',
-    component: Layout,
-    name: '社区风采',
-    meta: {
-      title: '社区风采',
-      icon: 'tree'
-    },
-    children: [
-      {
-        path: 'list',
-        name: '文章列表',
-        component: () => import('@/views/Community/list/index'),
-        meta: { title: '文章列表' }
-      },
-      {
-        path: 'editor',
-        name: '新建文档',
-        component: () => import('@/views/Community/editor/index'),
-        meta: { title: '新建文档' }
-      }
-    ]
   },
   {
     path: '/notice',

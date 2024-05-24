@@ -7,7 +7,7 @@ export function getList(token, params) {
       'Authorization': token,
       'Content-Type': 'application/json'
     },
-    url: '/user/SuggestionAll/',
+    url: '/user/ComplaintAll/',
     method: 'get',
     params
   })
@@ -19,7 +19,7 @@ export function handleForm(token, id, formData) {
       'Authorization': token,
       'Content-Type': 'application/json'
     },
-    url: `/user/SuggestionListDetail/${id}/`,
+    url: `/user/ComplaintListDetail/${id}/`,
     method: 'put',
     data: JSON.stringify(formData)
   })
