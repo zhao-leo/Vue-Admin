@@ -33,6 +33,9 @@
         <el-table-column prop="label" label="类型" width="180" />
         <el-table-column prop="value" label="内容" />
       </el-table>
+      <div v-for="(item, index) in medialinkset" :key="index" class="image-container">
+        <el-image :src="item.sugg_media" fit="contain" />
+      </div>
       <el-row :gutter="20">
         <el-col :span="12">
           <el-input v-model="handlerName" placeholder="请输入处理人姓名" />
@@ -58,6 +61,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      medialinkset: '',
       list: null,
       listLoading: true,
       dialogVisible: false,
@@ -90,6 +94,7 @@ export default {
       this.dialogData[2].value = row.comp_name
       this.dialogData[3].value = row.comp_user_tele
       this.dialogData[4].value = row.comp_site
+      this.medialinkset = row.complaintmedia_set
     },
     submitReply() {
       const formData = {
@@ -125,3 +130,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.image-container {
+  display: inline-block;
+  margin-right: 10px;
+}
+</style>
