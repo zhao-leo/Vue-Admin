@@ -1,11 +1,10 @@
 <template>
   <div class="profile-view">
-    <h1>管理员信息</h1>
+    <h1 style="font-size: 2em;">管理员信息</h1>
     <el-card>
-      <div>名字: {{ formData.manager_name }}</div>
-      <div>手机号码: {{ formData.manager_tele }}</div>
-      <div>账号: {{ formData.manager_account }}</div>
-      <div>密码: ******</div>
+      <div style="font-size: 1.2em;">名字: {{ formData.manager_name }}</div>
+      <div style="font-size: 1.2em;">手机号码: {{ formData.manager_tele }}</div>
+      <div style="font-size: 1.2em;">账号: {{ formData.manager_account }}</div>
       <el-button type="primary" @click="openDialog">编辑</el-button>
     </el-card>
     <el-card>
@@ -23,15 +22,6 @@
         <el-form-item label="账号:">
           <el-input v-model="formData.manager_account" type="text" />
         </el-form-item>
-        <el-form-item label="设置新密码:">
-          <el-input
-            v-model="formData.manager_code"
-            :type="passwordType"
-            :suffix-icon="passwordType === 'password' ? 'el-icon-view' : 'el-icon-edit'"
-            :minlength="6"
-            @click:append="showPwd"
-          />
-        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm">提交</el-button>
         </el-form-item>
@@ -40,10 +30,12 @@
     <el-dialog title="修改密码" :visible.sync="passwordEditMode" @close="passwordEditMode = false">
       <el-form class="form">
         <el-form-item label="设置新密码:">
-          <el-input v-model="newPassword" type="password" />
+          <el-input v-model="newPassword" :type="showNewPassword ? 'text' : 'password'" />
+          <el-button type="text" @click="showNewPassword = !showNewPassword">{{ showNewPassword ? '隐藏密码' : '显示密码' }}</el-button>
         </el-form-item>
         <el-form-item label="确认新密码:">
-          <el-input v-model="confirmNewPassword" type="password" />
+          <el-input v-model="confirmNewPassword" :type="showConfirmNewPassword ? 'text' : 'password'" />
+          <el-button type="text" @click="showConfirmNewPassword = !showConfirmNewPassword">{{ showConfirmNewPassword ? '隐藏密码' : '显示密码' }}</el-button>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitPasswordForm">提交</el-button>
@@ -54,6 +46,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import { handlePasswordSubmit, handleinformationSubmit } from '@/api/profile.js'
 
 export default {
   data() {
@@ -63,20 +56,23 @@ export default {
         manager_tele: '',
         manager_account: ''
       },
+      showNewPassword: false,
+      showConfirmNewPassword: false,
+      newPassword: '',
+      confirmNewPassword: '',
       editMode: false,
-      passwordType: 'password'
+      passwordEditMode: false
     }
   },
   computed: {
     ...mapGetters([
-      'name', 'phonenumber', 'roles'
+      'name', 'phonenumber', 'roles', 'token'
     ])
   },
   created() {
     this.formData.manager_name = this.name
     this.formData.manager_tele = this.phonenumber
     this.formData.manager_account = this.roles
-    console.log(this.formData)
   },
   methods: {
     openDialog() {
@@ -86,26 +82,22 @@ export default {
 
     openPasswordDialog() {
       this.passwordEditMode = true
-      this.newPassword = ''
-      this.confirmNewPassword = ''
     },
     submitForm() {
       if (this.formData.manager_tele.length !== 11) {
         this.$message.error('请输入11位手机号码')
         return
       }
-      console.log(this.formData.manager_account, this.formData.manager_code)
+      handleinformationSubmit(this.token, this.formData)
+      // 处理提交逻辑，比如发送请求等
       this.editMode = false
     },
-    showPwd() {
-      this.passwordType === 'password' ? 'text' : 'password'
-    },
     submitPasswordForm() {
-      // 验证密码是否一致等操作
-      if (this.newPassword !== this.confirmNewPassword) {
-        this.$message.error('两次输入的密码不一致')
-        return
+      const passworddata = {
+        manager_code: this.newPassword,
+        manager_recode: this.confirmNewPassword
       }
+      handlePasswordSubmit(this.token, passworddata)
       // 处理提交逻辑，比如发送请求等
       console.log('新密码:', this.newPassword)
       this.passwordEditMode = false

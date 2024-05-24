@@ -32,7 +32,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/user': {
-        target: 'http://10.21.235.116:8000',
+        target: 'http://10.29.241.43:8000',
         changeOrigin: true
       }
     },

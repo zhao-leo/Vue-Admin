@@ -1,11 +1,25 @@
-export function handleForm(token, id, formData) {
-    return axios({
-      headers: {
-        'Authorization': token,
-        'Content-Type': 'application/json'
-      },
-      url: `/user/SuggestionListDetail/${id}/`,
-      method: 'put',
-      data: JSON.stringify(formData)
-    })
-  }
+import axios from 'axios'
+
+export function handlePasswordSubmit(token, formData) {
+  return axios({
+    headers: {
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    },
+    url: `/user/ManagerDetail/`,
+    method: 'put',
+    data: JSON.stringify(formData)
+  })
+}
+
+export function handleinformationSubmit(token, formData) {
+  return axios({
+    headers: {
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    },
+    url: `/user/ManagerDetail/`,
+    method: 'put',
+    data: JSON.stringify(formData)
+  })
+}
