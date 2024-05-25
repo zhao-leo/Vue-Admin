@@ -61,6 +61,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      id: '',
       medialinkset: '',
       list: null,
       listLoading: true,
@@ -95,6 +96,7 @@ export default {
       this.dialogData[3].value = row.sugg_user_tele
       this.dialogData[4].value = row.sugg_site
       this.medialinkset = row.suggestionmedia_set
+      this.id = row.id
     },
     submitReply() {
       const formData = {
