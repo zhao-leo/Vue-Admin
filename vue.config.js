@@ -30,9 +30,14 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
+    host: '0.0.0.0',
     proxy: {
       '/user': {
-        target: 'http://10.21.235.116:8000',
+        target: 'http://django:8000',
+        changeOrigin: true
+      },
+      '/media': {
+        target: 'http://django:8000',
         changeOrigin: true
       }
     },
