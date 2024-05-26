@@ -35,10 +35,6 @@ module.exports = {
       '/user': {
         target: 'http://django:8000',
         changeOrigin: true
-      },
-      '/media': {
-        target: 'http://django:8000',
-        changeOrigin: true
       }
     },
     port: port,
