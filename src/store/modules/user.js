@@ -9,7 +9,7 @@ const getDefaultState = () => {
     avatar: '',
     roles: '',
     phonenumber: '',
-    id: 4
+    id: ''
   }
 }
 
@@ -61,13 +61,13 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
-        console.log(data)
+        // console.log(data)
         if (!data) {
           return reject('登陆失败，请重新登陆.')
         }
 
         const { manager_account, manager_name, manager_tele, id } = data
-
+        // console.log(manager_account)
         commit('SET_NAME', manager_name)
         // commit('SET_AVATAR', avatar)
         commit('SET_PHONENUMBER', manager_tele)

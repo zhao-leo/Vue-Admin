@@ -8,18 +8,18 @@
       </el-table-column>
       <el-table-column label="内容">
         <template slot-scope="scope">
-          {{ scope.row.sugg_text }}
+          {{ scope.row.comp_text }}
         </template>
       </el-table-column>
       <el-table-column label="提出人" width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.sugg_name }}</span>
+          <span>{{ scope.row.comp_name }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="最后处理日期" width="250">
         <template slot-scope="scope">
           <i class="el-icon-time" />
-          <span>{{ scope.row.sugg_sub_time }}</span>
+          <span>{{ scope.row.comp_sub_time }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" label="操作" width="150">
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { getList, handleForm } from '@/api/suggestion.js'
+import { getList, handleForm } from '@/api/complaint.js'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -90,22 +90,22 @@ export default {
   methods: {
     handleEdit(row) {
       this.dialogVisible = true
-      this.dialogData[0].value = row.sugg_text
-      this.dialogData[1].value = row.sugg_sub_time
-      this.dialogData[2].value = row.sugg_name
-      this.dialogData[3].value = row.sugg_user_tele
-      this.dialogData[4].value = row.sugg_site
-      this.medialinkset = row.suggestionmedia_set
+      this.dialogData[0].value = row.comp_text
+      this.dialogData[1].value = row.comp_sub_time
+      this.dialogData[2].value = row.comp_name
+      this.dialogData[3].value = row.comp_user_tele
+      this.dialogData[4].value = row.comp_site
+      this.medialinkset = row.complaintmedia_set
       this.id = row.id
     },
     submitReply() {
       const formData = {
-        sugg_status: true,
-        sugg_staff_name: this.handlerName,
-        sugg_staff_tele: this.handlerPhone,
-        sugg_way: this.replyMethod,
-        sugg_content: this.replyContent,
-        sugg_handle_id: this.ids
+        comp_status: true,
+        comp_staff_name: this.handlerName,
+        comp_staff_tele: this.handlerPhone,
+        comp_way: this.replyMethod,
+        comp_content: this.replyContent,
+        comp_handle_id: this.ids
       }
       handleForm(this.token, this.id, formData).then(() => {
         this.dialogVisible = false

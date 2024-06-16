@@ -1,15 +1,11 @@
 <template>
-  <el-container class="app-container">
+  <el-container>
     <el-header>
       <h1>温馨提示</h1>
     </el-header>
     <el-main>
-      <el-input
-        v-model="noticeContent"
-        type="textarea"
-        :rows="4"
-        placeholder="请输入内容"
-      />
+      <el-input v-model="noticeContent" type="textarea" :rows="4" placeholder="请输入公告内容" />
+      <el-input v-model="formerContent" type="textarea" placeholder="当前公告内容" disabled style="font-size: 20px; color: #000000;" />
     </el-main>
     <el-footer>
       <el-button type="primary" @click="submitNotice">提交</el-button>
@@ -18,23 +14,45 @@
 </template>
 
 <script>
-import { MessageBox } from 'element-ui'
+import { handletext, gettext } from '@/api/notice.js'
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
     return {
-      noticeContent: ''
+      noticeContent: '',
+      formerContent: '',
+      listLoading: true,
+      data: null
     }
   },
+  computed: {
+    ...mapGetters([
+      'token'
+    ])
+  },
+  created() {
+    this.fetchData()
+  },
   methods: {
-    submitNotice() {
-      MessageBox.alert('提交成功！', '温馨提示', {
-        confirmButtonText: '确定',
-        callback: action => {
-          // 在这里处理用户点击确定按钮后的逻辑
-        }
+    fetchData() {
+      this.listLoading = true
+      gettext(this.token, {}).then(response => {
+        // console.log(response)
+        this.data = response.data
+        this.listLoading = false
+        // console.log(this.data.data.warn_text)
+        this.formerContent = this.data.data.warn_text
       })
-      console.log(this.noticeContent)
+    },
+    submitNotice() {
+      const formdata = {
+        warn_text: this.noticeContent
+      }
+      handletext(this.token, formdata).then(() => {
+        this.noticeContent = ''
+        location.reload()
+      })
     }
   }
 }

@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 export function login(data) {
-  console.log(data)
+  // console.log(data)
   return request({
     url: '/user/ManagerLogin/',
     method: 'post',
@@ -21,8 +21,7 @@ export function getInfo(token) {
 }
 
 export function logout() {
-  return request({
-    url: '/vue-admin-template/user/logout',
-    method: 'post'
+  return new Promise((resolve) => {
+    resolve()
   })
 }
